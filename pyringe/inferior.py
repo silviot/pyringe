@@ -31,6 +31,7 @@ import re
 import select
 import signal
 import subprocess
+import sys
 import tempfile
 import time
 
@@ -143,7 +144,7 @@ class GdbProxy(object):
     # to do this with a command line flag.
     arglist = (_GDB_ARGS +
                ['--eval-command', 'set architecture ' + arch] +
-               ['--command=' + os.path.join(PAYLOAD_DIR, fname)
+               ['--command={} {}'.format(sys.executable, os.path.join(PAYLOAD_DIR, fname))
                 for fname in _GDB_STARTUP_FILES])
 
     # Add version-specific args
